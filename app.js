@@ -12,8 +12,6 @@ const result = excelToJson({
 const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey("");
 
-//console.log(result["Sheet1"][0]["A"]);
-
 result["Sheet1"].forEach((element) => {
   sendMessageWW(createMessageWW(element));
 });
@@ -26,6 +24,8 @@ function createMessageWW(user) {
     text: "and easy to do anywhere, even with Node.js",
     html: getCertificate(user),
   };
+  console.log(`Created a message for ${user["A"]}`);
+  console.log(`Sending Email to ${user["B"]}`);
   return msg;
 }
 //`<strong>and easy to do anywhere, even with Node.js </strong> ${user["C"]}`
@@ -44,6 +44,7 @@ function getCertificate(user) {
   var today = new Date();
   var date =
     today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+  console.log("wrapped up the HTML element");
   return `<!DOCTYPE html>
     <html>
     <head>
@@ -97,7 +98,7 @@ function getCertificate(user) {
                         </div>
                         <div class="col-md-4">
                             <h3 class="text-right">
-                                Jeff dean
+                                Signed in,
                             </h3>
                             <p id='dDate'class="text-right">
                                 ${date}
